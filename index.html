@@ -7,34 +7,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/simple-grid.css">
     <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
     <title>Matching Dates</title>
 </head>
 
-<body>
+<body style="background-image:url(wallpaper.jpg)">
     <div class="container">
         <div class="row weekday center">
-            <div><h3>Monday</h3></div>
-            <div><h3>Tuesday</h3></div>
-            <div><h3>Wednesday</h3></div>
-            <div><h3>Thursday</h3></div>
-            <div><h3>Friday</h3></div>
-            <div><h3>Saturday</h3></div>
-            <div><h3>Sunday</h3></div>
+            <ul>
+                <li id="Monday"><h3>Monday</h3></li>
+                <li id="Tuesday"><h3>Tuesday</h3></li>
+                <li id="Wednesday"><h3>Wednesday</h3></li>
+                <li id="Thursday"><h3>Thursday</h3></li>
+                <li id="Friday"><h3>Friday</h3></li>
+                <li id="Saturday"><h3>Saturday</h3></li>
+                <li id="Sunday"><h3>Sunday</h3></li>
+            </ul>
         </div>
         <div class="row">
             
             <div class="col-3">
                 <h2>First date:</h2>
-                <input type="date">
+                <input id="first" type="date" value="2018-01-01">
             </div>
             <div class="col-3"></div>
             <div class="col-3">
                 <h2>Second date:</h2>
-                <input type="date">
+                <input id="second" type="date" value="2019-01-01">
             </div>
             <div class="col-3"></div>
         </div>
     </div>
 </body>
+<script src="js/weekday_manager.js"></script>
 
 </html>

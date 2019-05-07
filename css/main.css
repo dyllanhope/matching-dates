@@ -1,7 +1,7 @@
 body{
-    background-color: dimgrey
+    background-color: dimgrey;
 }
-.weekday div{
+.weekday li{
     width: 13.5%;
     height: 150px;
     float:left;
@@ -10,12 +10,21 @@ body{
     margin-left : auto;
     margin-right : auto;
     padding: 0px;
-    background-color: white;
     border-radius:5px;
+    list-style-type: none;
 }
 .weekday h3{
     width:180px; 
     -webkit-transform-origin:84px 70px;
     display:inline-block;
     -webkit-transform:rotate(-90deg);
+}
+.first {
+    background-color: blue;
+}
+.second {
+    background-color: red;
+}
+.both {
+    background-color: green;
 }
