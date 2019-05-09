@@ -1,6 +1,10 @@
 body{
     background-color: dimgrey;
 }
+h2{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 .weekday li{
     width: 13.5%;
     height: 150px;
@@ -20,11 +24,11 @@ body{
     -webkit-transform:rotate(-90deg);
 }
 .first {
-    background-color: blue;
+    background-color: blue !important;
 }
 .second {
-    background-color: red;
+    background-color: red !important;
 }
 .both {
-    background-color: green;
+    background-color: green !important;
 }
