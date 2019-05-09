@@ -1,11 +1,18 @@
 var firstDateElem = document.getElementById("first");
 var secondDateElem = document.getElementById("second");
-var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var weekdayTemplateSource = document.querySelector(".weekdayBarTemplate").innerHTML; 
+var weekdayData = document.querySelector(".weekdayData");
+var weekdayTemplate = Handlebars.compile(weekdayTemplateSource);
+var weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
 var firstDay = '';
 var secondDay = '';
 var both = false;
 
 window.onload = function () {
+    var weekdaysName = {daysOfWeek: weekdays };
+    var weekdayDataHTML = weekdayTemplate(weekdaysName);
+    weekdayData.innerHTML = weekdayDataHTML;
+
     dayColourChange(1);
     dayColourChange(2);
     whiten();
@@ -34,25 +41,31 @@ function whiten() {
 }
 function dayColourChange(num) {
     var selectedDay = '';
-    if(num ===1){
+    var element = num || 1;
+    if(element ===1){
         var selectedDate = new Date(firstDateElem.value);
-    } else if(num ===2){
+    } else if(element ===2){
         var selectedDate = new Date(secondDateElem.value);
     }
-    selectedDay = weekdays[selectedDate.getDay()];
+    if (selectedDate.getDay() === 0){
+        var index = 6;
+    } else {
+        var index = selectedDate.getDay()-1;
+    }
+    selectedDay = weekdays[index];
+    console.log(selectedDay);
     
     var selectedElem = document.getElementById(selectedDay);
 
-    if(num === 1){
-        firstDay = weekdays[selectedDate.getDay()];
+    if(element === 1){
+        firstDay = weekdays[index];
         if (firstDay === secondDay) {
             selectedElem.style.backgroundColor = "green";
-            both = true;
         } else {
             selectedElem.style.backgroundColor = "blue";
         }
-    } else if(num === 2){
-        secondDay = weekdays[selectedDate.getDay()];
+    } else if(element === 2){
+        secondDay = weekdays[index];
         if (secondDay === firstDay) {
             selectedElem.style.backgroundColor = "green";
         } else {
