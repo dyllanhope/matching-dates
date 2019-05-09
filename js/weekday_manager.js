@@ -3,13 +3,11 @@ var secondDateElem = document.getElementById("second");
 var weekdayTemplateSource = document.querySelector(".weekdayBarTemplate").innerHTML; 
 var weekdayData = document.querySelector(".weekdayData");
 var weekdayTemplate = Handlebars.compile(weekdayTemplateSource);
-var weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
-var firstDay = '';
-var secondDay = '';
-var both = false;
+var weekdayInstance = WeekdayColourManager();
+var weekdays = weekdayInstance.weekdays();
 
 window.onload = function () {
-    var weekdaysName = {daysOfWeek: weekdays };
+    var weekdaysName = {daysOfWeek: weekdays};
     var weekdayDataHTML = weekdayTemplate(weekdaysName);
     weekdayData.innerHTML = weekdayDataHTML;
 
@@ -28,49 +26,24 @@ secondDateElem.onchange = function () {
 function whiten() {
     for (var i = 0; i < weekdays.length; i++) {
         var ele = document.getElementById(weekdays[i]);
-        if ((weekdays[i] !== firstDay) && (weekdays[i] !== secondDay)){
+        if ((weekdays[i] !== weekdayInstance.first()) && (weekdays[i] !== weekdayInstance.second())){
             ele.style.backgroundColor = "white";
         }
     }
-    if (firstDay !== secondDay){
-        var firstReset = document.getElementById(firstDay);
-        var secondReset = document.getElementById(secondDay);
+    if (weekdayInstance.first() !== weekdayInstance.second()){
+        var firstReset = document.getElementById(weekdayInstance.first());
+        var secondReset = document.getElementById(weekdayInstance.second());
         firstReset.style.backgroundColor = "blue";
         secondReset.style.backgroundColor = "red";
     }
 }
 function dayColourChange(num) {
     var selectedDay = '';
-    var element = num || 1;
-    if(element ===1){
-        var selectedDate = new Date(firstDateElem.value);
-    } else if(element ===2){
-        var selectedDate = new Date(secondDateElem.value);
-    }
-    if (selectedDate.getDay() === 0){
-        var index = 6;
-    } else {
-        var index = selectedDate.getDay()-1;
-    }
+    var index = weekdayInstance.index(num);
     selectedDay = weekdays[index];
-    console.log(selectedDay);
     
     var selectedElem = document.getElementById(selectedDay);
+    selectedElem.style.backgroundColor= weekdayInstance.colour();
 
-    if(element === 1){
-        firstDay = weekdays[index];
-        if (firstDay === secondDay) {
-            selectedElem.style.backgroundColor = "green";
-        } else {
-            selectedElem.style.backgroundColor = "blue";
-        }
-    } else if(element === 2){
-        secondDay = weekdays[index];
-        if (secondDay === firstDay) {
-            selectedElem.style.backgroundColor = "green";
-        } else {
-            selectedElem.style.backgroundColor = "red";
-        }
-    }
     
 }
