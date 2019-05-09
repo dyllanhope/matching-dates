@@ -1,34 +1,37 @@
 function WeekdayColourManager() {
     var weekdaysList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    var firstDay = '';
-    var secondDay = '';
-    var element = 0;
+    var firstDay = 'Monday';
+    var secondDay = 'Tuesday';
+    var element = 1;
+    var indexDay ;
 
-    function determineIndex(num) {
+    function determineIndex(num,firstDate,secondDate) {
         element = num || 1;
+        var dateOne = firstDate || '2018-01-01';
+        var dateTwo = secondDate || '2019-01-01'
         if (element === 1) {
-            var selectedDate = new Date(firstDateElem.value);
+            var selectedDate = new Date(dateOne);
         } else if (element === 2) {
-            var selectedDate = new Date(secondDateElem.value);
+            var selectedDate = new Date(dateTwo);
         }
         if (selectedDate.getDay() === 0) {
-            var indexDay = 6;
+            indexDay = 6;
         } else {
-            var indexDay = selectedDate.getDay() - 1;
+            indexDay = selectedDate.getDay() - 1;
         }
-        return indexDay;
+        return weekdaysList[indexDay];
     }
 
     function determineColour(){
         if(element === 1){
-            firstDay = weekdaysList[determineIndex(element)];
+            firstDay = weekdaysList[indexDay];
             if (firstDay === secondDay) {
                 return "green";
             } else {
                 return "blue";
             }
         } else if(element === 2){
-            secondDay = weekdaysList[determineIndex(element)];
+            secondDay = weekdaysList[indexDay];
             if (secondDay === firstDay) {
                 return "green";
             } else {

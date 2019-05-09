@@ -39,8 +39,7 @@ function whiten() {
 }
 function dayColourChange(num) {
     var selectedDay = '';
-    var index = weekdayInstance.index(num);
-    selectedDay = weekdays[index];
+    selectedDay = weekdayInstance.index(num, firstDateElem.value, secondDateElem.value);
     
     var selectedElem = document.getElementById(selectedDay);
     selectedElem.style.backgroundColor= weekdayInstance.colour();

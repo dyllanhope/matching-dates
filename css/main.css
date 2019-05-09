@@ -23,15 +23,3 @@ h2{
     display:inline-block;
     -webkit-transform:rotate(-90deg);
 }
-.first li{
-    background-color: blue !important;
-}
-.second li{
-    background-color: red !important;
-}
-.both li{
-    background-color: green !important;
-}
-.white li{
-    background-color: white !important;
-}
