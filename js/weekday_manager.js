@@ -28,13 +28,16 @@ function whiten() {
         var ele = document.getElementById(weekdays[i]);
         if ((weekdays[i] !== weekdayInstance.first()) && (weekdays[i] !== weekdayInstance.second())) {
             ele.style.backgroundColor = "white";
+            ele.style.color = "black";
         }
     }
     if (weekdayInstance.first() !== weekdayInstance.second()) {
         var firstReset = document.getElementById(weekdayInstance.first());
         var secondReset = document.getElementById(weekdayInstance.second());
         firstReset.style.backgroundColor = "blue";
+        firstReset.style.color = "white";
         secondReset.style.backgroundColor = "red";
+        secondReset.style.color = "white";
     }
 }
 function dayColourChange(num) {
@@ -43,6 +46,7 @@ function dayColourChange(num) {
 
     var selectedElem = document.getElementById(selectedDay);
     selectedElem.style.backgroundColor = weekdayInstance.colour();
+    selectedElem.style.color = "white";
 
 
 }
