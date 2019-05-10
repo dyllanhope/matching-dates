@@ -3,6 +3,7 @@ var secondDateElem = document.getElementById("second");
 var weekdayTemplateSource = document.querySelector(".weekdayBarTemplate").innerHTML;
 var weekdayData = document.querySelector(".weekdayData");
 var weekdayTemplate = Handlebars.compile(weekdayTemplateSource);
+
 var weekdayInstance = WeekdayColourManager();
 var weekdays = weekdayInstance.weekdays();
 
