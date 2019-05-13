@@ -24,21 +24,6 @@ function buildWeekdays() {
     weekdayData.innerHTML = weekdayDataHTML;
 }
 
-Handlebars.registerHelper('display', function (items,options) {
-    var out = "<ul>";
-
-    for (var i = 0, l = items.length; i < l; i++) {
-        var tempDay = options.fn(items[i]).trim();
-        if ((tempDay == weekdayInstance.first()) && (tempDay == weekdayInstance.second())) {
-            out = out + "<li class='both' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-        } else if (tempDay == weekdayInstance.first()) {
-            out = out + "<li class='first' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-        } else if (tempDay == weekdayInstance.second()) {
-            out = out + "<li class='second' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-        } else {
-            out = out + "<li class='clear' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-        }
-    }
-
-    return out + "</ul>";
+Handlebars.registerHelper('display', function (items) {
+    return weekdayInstance.buildEle(items);
 });
