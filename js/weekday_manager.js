@@ -5,49 +5,42 @@ var weekdayData = document.querySelector(".weekdayData");
 var weekdayTemplate = Handlebars.compile(weekdayTemplateSource);
 
 var weekdayInstance = WeekdayColourManager();
-var weekdays = weekdayInstance.weekdays();
 
 window.onload = function () {
-    var weekdaysName = { daysOfWeek: weekdays };
-    var weekdayDataHTML = weekdayTemplate(weekdaysName);
-    weekdayData.innerHTML = weekdayDataHTML;
-
-    dayColourChange(1);
-    dayColourChange(2);
-    whiten();
+    buildWeekdays();
 }
 firstDateElem.onchange = function () {
-    dayColourChange(1);
-    whiten();
+    weekdayInstance.index(1, firstDateElem.value, secondDateElem.value);
+    weekdayInstance.updateDay();
+    buildWeekdays();
 }
 secondDateElem.onchange = function () {
-    dayColourChange(2);
-    whiten();
+    weekdayInstance.index(2, firstDateElem.value, secondDateElem.value);
+    weekdayInstance.updateDay();
+    buildWeekdays();
 }
-function whiten() {
-    for (var i = 0; i < weekdays.length; i++) {
-        var ele = document.getElementById(weekdays[i]);
-        if ((weekdays[i] !== weekdayInstance.first()) && (weekdays[i] !== weekdayInstance.second())) {
-            ele.style.backgroundColor = "white";
-            ele.style.color = "black";
+
+function buildWeekdays() {
+    var weekdaysName = { daysOfWeek: weekdayInstance.weekdays() };
+    var weekdayDataHTML = weekdayTemplate(weekdaysName);
+    weekdayData.innerHTML = weekdayDataHTML;
+}
+
+Handlebars.registerHelper('display', function (items,options) {
+    var out = "<ul>";
+
+    for (var i = 0, l = items.length; i < l; i++) {
+        var tempDay = options.fn(items[i]).trim();
+        if ((tempDay == weekdayInstance.first()) && (tempDay == weekdayInstance.second())) {
+            out = out + "<li class='both' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
+        } else if (tempDay == weekdayInstance.first()) {
+            out = out + "<li class='first' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
+        } else if (tempDay == weekdayInstance.second()) {
+            out = out + "<li class='second' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
+        } else {
+            out = out + "<li class='clear' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
         }
     }
-    if (weekdayInstance.first() !== weekdayInstance.second()) {
-        var firstReset = document.getElementById(weekdayInstance.first());
-        var secondReset = document.getElementById(weekdayInstance.second());
-        firstReset.style.backgroundColor = "blue";
-        firstReset.style.color = "white";
-        secondReset.style.backgroundColor = "red";
-        secondReset.style.color = "white";
-    }
-}
-function dayColourChange(num) {
-    var selectedDay = '';
-    selectedDay = weekdayInstance.index(num, firstDateElem.value, secondDateElem.value);
 
-    var selectedElem = document.getElementById(selectedDay);
-    selectedElem.style.backgroundColor = weekdayInstance.colour();
-    selectedElem.style.color = "white";
-
-
-}
+    return out + "</ul>";
+});

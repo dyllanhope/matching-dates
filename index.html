@@ -11,21 +11,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
     <script type="text/x-template" class="weekdayBarTemplate">
-    <ul>
-        {{#each daysOfWeek}}
-        <li id='{{this}}'><h3>{{this}}</h3></li>
-        {{/each}}
-    </ul>
+        {{#display daysOfWeek}}
+            {{day}}
+        {{/display}}
     </script>
-
 
     <title>Matching Dates</title>
 </head>
 
 <body style="background-image:url(wallpaper.jpg)">
     <div class="container">
-        <div class="row weekday center weekdayData">
+        <div class="row weekday">
+            <div class="weekdayData">
 
+            </div>
         </div>
         <div class="row">
 
