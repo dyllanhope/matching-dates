@@ -6,12 +6,12 @@ function WeekdayColourManager() {
                         {day:"Friday"}, 
                         {day:"Saturday"}, 
                         {day:"Sunday"}];
-    var firstDay = 'Monday';
-    var secondDay = 'Tuesday';
+    var firstDay = '';
+    var secondDay = '';
     var element = 1;
     var indexDay;
 
-    function determineIndex(num, firstDate, secondDate) {
+    function determineDay(num, firstDate, secondDate) {
         element = num || 1;
         var dateOne = firstDate || '2018-01-01';
         var dateTwo = secondDate || '2019-01-01';
@@ -25,9 +25,7 @@ function WeekdayColourManager() {
         } else {
             indexDay = selectedDate.getDay() - 1;
         }
-    }
 
-    function determineDay() {
         if (element === 1) {
             firstDay = Object.values(weekdaysList[indexDay]);
         } else if (element === 2) {
@@ -48,8 +46,7 @@ function WeekdayColourManager() {
     }
 
     return {
-        index: determineIndex,
-        updateDay: determineDay,
+        day: determineDay,
         weekdays: displayWeek,
         first: displayFirst,
         second: displaySecond

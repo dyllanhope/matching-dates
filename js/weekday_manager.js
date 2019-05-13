@@ -10,13 +10,11 @@ window.onload = function () {
     buildWeekdays();
 }
 firstDateElem.onchange = function () {
-    weekdayInstance.index(1, firstDateElem.value, secondDateElem.value);
-    weekdayInstance.updateDay();
+    weekdayInstance.day(1, firstDateElem.value, secondDateElem.value);
     buildWeekdays();
 }
 secondDateElem.onchange = function () {
-    weekdayInstance.index(2, firstDateElem.value, secondDateElem.value);
-    weekdayInstance.updateDay();
+    weekdayInstance.day(2, firstDateElem.value, secondDateElem.value);
     buildWeekdays();
 }
 
