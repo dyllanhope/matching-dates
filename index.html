@@ -11,12 +11,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
     <script type="text/x-template" class="weekdayBarTemplate">
-        {{#display}}
-            {{day}}
-        {{/display}}
+        <ul>
+            {{#each daysOfWeek}}
+                {{#isChange}}
+                    {{day}}
+                {{/isChange}}
+            {{/each}}
+        </ul>
     </script>
 
+    <script type="text/x-template" class="weekdayBarTemplate">
+        <ul>
+            {{#each daysOfWeek}}
+                <li class="{{style}}" > {{day}} </li>
+            {{/each}}
+        </ul>
+    </script>
+
+    {
+        daysOfWeek : [
+            { day : "Sunday", style : "" },
+            { day : "Monday", style : "" },
+            { day : "Tuesday", style : "green" },
+            <!-- { day : "Sunday", style : "" },
+            { day : "Sunday", style : "" }, -->
+        ]
+    }
+
+
     <title>Matching Dates</title>
+    
 </head>
 
 <body style="background-image:url(wallpaper.jpg)">

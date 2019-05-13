@@ -6,6 +6,7 @@ function WeekdayColourManager() {
     { day: "Friday" },
     { day: "Saturday" },
     { day: "Sunday" }];
+
     var firstDay = '';
     var secondDay = '';
 
@@ -23,11 +24,11 @@ function WeekdayColourManager() {
                 firstIndexDay = firstSelectedDate.getDay() - 1;
             }
             firstDay = weekdaysList[firstIndexDay].day;
-        } else if(firstDate==undefined){
+        } else if (firstDate == undefined) {
             firstDay = '';
         }
 
-        if (secondDate!= undefined) {
+        if (secondDate != undefined) {
             var secondSelectedDate = new Date(secondDate);
             if (secondSelectedDate.getDay() === 0) {
                 secondIndexDay = 6;
@@ -35,36 +36,25 @@ function WeekdayColourManager() {
                 secondIndexDay = secondSelectedDate.getDay() - 1;
             }
             secondDay = weekdaysList[secondIndexDay].day;
-        } else if(secondDate==undefined){
+        } else if (secondDate == undefined) {
             secondDay = '';
         }
-    }
-
-    function createElement() {
-        var out = "<ul>";
-
-        for (var i = 0, l = weekdaysList.length; i < l; i++) {
-            var tempDay = weekdaysList[i].day;
-            if ((tempDay === firstDay) && (tempDay === secondDay)) {
-                out = out + "<li class='both' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-            } else if (tempDay === firstDay) {
-                out = out + "<li class='first' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-            } else if (tempDay === secondDay) {
-                out = out + "<li class='second' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-            } else {
-                out = out + "<li class='clear' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
-            }
-        }
-        return out + "</ul>";
     }
 
     function displayWeek() {
         return weekdaysList;
     }
+    function displayFirstDay(){
+        return firstDay;
+    }
+    function displaySecondDay(){
+        return secondDay;
+    }
 
     return {
-        day: determineDay,
-        buildEle: createElement,
-        weekdays: displayWeek
+        setDays: determineDay,
+        weekdays: displayWeek,
+        first: displayFirstDay,
+        second: displaySecondDay
     }
 }
