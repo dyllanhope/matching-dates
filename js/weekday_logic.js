@@ -8,35 +8,43 @@ function WeekdayColourManager() {
     { day: "Sunday" }];
     var firstDay = '';
     var secondDay = '';
-    var element = 1;
-    var indexDay;
 
-    function determineDay(num, firstDate, secondDate) {
-        element = num || 1;
-        var dateOne = firstDate || '2018-01-01';
-        var dateTwo = secondDate || '2019-01-01';
-        if (element === 1) {
-            var selectedDate = new Date(dateOne);
-        } else if (element === 2) {
-            var selectedDate = new Date(dateTwo);
-        }
-        if (selectedDate.getDay() === 0) {
-            indexDay = 6;
-        } else {
-            indexDay = selectedDate.getDay() - 1;
+    function determineDay(firstD, secondD) {
+        var firstIndexDay;
+        var secondIndexDay;
+        var firstDate = firstD || undefined;
+        var secondDate = secondD || undefined;
+
+        if (firstDate != undefined) {
+            var firstSelectedDate = new Date(firstDate);
+            if (firstSelectedDate.getDay() === 0) {
+                firstIndexDay = 6;
+            } else {
+                firstIndexDay = firstSelectedDate.getDay() - 1;
+            }
+            firstDay = weekdaysList[firstIndexDay].day;
+        } else if(firstDate==undefined){
+            firstDay = '';
         }
 
-        if (element === 1) {
-            firstDay = weekdaysList[indexDay].day;
-        } else if (element === 2) {
-            secondDay = weekdaysList[indexDay].day;
+        if (secondDate!= undefined) {
+            var secondSelectedDate = new Date(secondDate);
+            if (secondSelectedDate.getDay() === 0) {
+                secondIndexDay = 6;
+            } else {
+                secondIndexDay = secondSelectedDate.getDay() - 1;
+            }
+            secondDay = weekdaysList[secondIndexDay].day;
+        } else if(secondDate==undefined){
+            secondDay = '';
         }
     }
-    function createElement(items) {
+
+    function createElement() {
         var out = "<ul>";
 
-        for (var i = 0, l = items.length; i < l; i++) {
-            var tempDay = items[i].day;
+        for (var i = 0, l = weekdaysList.length; i < l; i++) {
+            var tempDay = weekdaysList[i].day;
             if ((tempDay === firstDay) && (tempDay === secondDay)) {
                 out = out + "<li class='both' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
             } else if (tempDay === firstDay) {
@@ -47,7 +55,6 @@ function WeekdayColourManager() {
                 out = out + "<li class='clear' id='" + tempDay + "'><h3>" + tempDay + "</h3></li>";
             }
         }
-
         return out + "</ul>";
     }
 
@@ -55,19 +62,9 @@ function WeekdayColourManager() {
         return weekdaysList;
     }
 
-    function displayFirst() {
-        return firstDay;
-    }
-
-    function displaySecond() {
-        return secondDay;
-    }
-
     return {
         day: determineDay,
         buildEle: createElement,
-        weekdays: displayWeek,
-        first: displayFirst,
-        second: displaySecond
+        weekdays: displayWeek
     }
 }

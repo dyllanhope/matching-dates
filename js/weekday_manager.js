@@ -10,11 +10,11 @@ window.onload = function () {
     buildWeekdays();
 }
 firstDateElem.onchange = function () {
-    weekdayInstance.day(1, firstDateElem.value, secondDateElem.value);
+    weekdayInstance.day(firstDateElem.value, secondDateElem.value);
     buildWeekdays();
 }
 secondDateElem.onchange = function () {
-    weekdayInstance.day(2, firstDateElem.value, secondDateElem.value);
+    weekdayInstance.day(firstDateElem.value, secondDateElem.value);
     buildWeekdays();
 }
 
@@ -24,6 +24,6 @@ function buildWeekdays() {
     weekdayData.innerHTML = weekdayDataHTML;
 }
 
-Handlebars.registerHelper('display', function (items) {
-    return weekdayInstance.buildEle(items);
+Handlebars.registerHelper('display', function () {
+    return weekdayInstance.buildEle();
 });
