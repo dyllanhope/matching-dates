@@ -9,17 +9,14 @@ function WeekdayColourManager() {
 
     function determineDay(firstD, secondD) {
         var dateString = firstD + ',' + secondD;
+        var selectedIndex = [-1,-1];
+        var selectedDate = '';
+        var datesArr = dateString.split(',');
 
         for (var x = 0; x < weekdaysList.length; x++) {
             weekdaysList[x].style = "clear";
         }
-        updateList(dateString);
 
-    }
-    function updateList(dates) {
-        var selectedIndex = [-1,-1];
-        var selectedDate = '';
-        var datesArr = dates.split(',');
         for (var k = 0; k < datesArr.length; k++) {
             if (datesArr[k]) {
                 selectedDate = new Date(datesArr[k]);
@@ -39,6 +36,7 @@ function WeekdayColourManager() {
                 }
             }
         }
+        
 
     }
 
