@@ -8,36 +8,46 @@ function WeekdayColourManager() {
     { day: "Sunday", style: "clear" }];
 
     function determineDay(firstD, secondD) {
-        var dateString = firstD + ',' + secondD;
-        var selectedIndex = [-1,-1];
-        var selectedDate = '';
-        var datesArr = dateString.split(',');
 
+        clearWeekdayListStyling();
+
+        let firstDayData = getWeekDayData(firstD);
+        let secondDayData = getWeekDayData(secondD);
+
+        setWeekdayListStyling(firstDayData, secondDayData);
+
+    }
+    function clearWeekdayListStyling() {
         for (var x = 0; x < weekdaysList.length; x++) {
             weekdaysList[x].style = "clear";
         }
+    }
 
-        for (var k = 0; k < datesArr.length; k++) {
-            if (datesArr[k]) {
-                selectedDate = new Date(datesArr[k]);
-                if (selectedDate.getDay() === 0) {
-                    selectedIndex[k] = 6;
-                } else {
-                    selectedIndex[k] = selectedDate.getDay() - 1;
-                }
-    
-                if (k === 0) {
-                    weekdaysList[selectedIndex[0]].style = "first";
-                }else if (k === 1) {
-                    weekdaysList[selectedIndex[1]].style = "second";
-                }
-                if(selectedIndex[0]===selectedIndex[1]){
-                    weekdaysList[selectedIndex[0]].style = "both";
-                }
+    function getWeekDayData(date) {
+        var returnData = { day: "", index: -1 };
+        if (date) {
+            var selectedDate = new Date(date);
+            if (selectedDate.getDay() === 0) {
+                returnData.index = 6;
+            } else {
+                returnData.index = selectedDate.getDay() - 1;
+            }
+            returnData.day = weekdaysList[returnData.index].day;
+        }
+        return returnData;
+    }
+
+    function setWeekdayListStyling(firstData, secondData) {
+        if (secondData.day === firstData.day) {
+            weekdaysList[secondData.index].style = "both";
+        } else {
+            if (secondData.index > -1) {
+                weekdaysList[secondData.index].style = "second";
+            }
+            if (firstData.index > -1) {
+                weekdaysList[firstData.index].style = "first";
             }
         }
-        
-
     }
 
     function displayWeek() {
