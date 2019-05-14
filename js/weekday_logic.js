@@ -1,20 +1,24 @@
 function WeekdayColourManager() {
-    var weekdaysList = [{ day: "Monday" },
-    { day: "Tuesday" },
-    { day: "Wednesday" },
-    { day: "Thursday" },
-    { day: "Friday" },
-    { day: "Saturday" },
-    { day: "Sunday" }];
+    var weekdaysList = [{ day: "Monday", style: "clear" },
+    { day: "Tuesday", style: "clear" },
+    { day: "Wednesday", style: "clear" },
+    { day: "Thursday", style: "clear" },
+    { day: "Friday", style: "clear" },
+    { day: "Saturday", style: "clear" },
+    { day: "Sunday", style: "clear" }];
 
     var firstDay = '';
     var secondDay = '';
 
     function determineDay(firstD, secondD) {
-        var firstIndexDay;
-        var secondIndexDay;
+        var firstIndexDay = -1;
+        var secondIndexDay = -1;
         var firstDate = firstD || undefined;
         var secondDate = secondD || undefined;
+
+        for (var x = 0; x < weekdaysList.length; x++) {
+            weekdaysList[x].style = "clear";
+        }
 
         if (firstDate != undefined) {
             var firstSelectedDate = new Date(firstDate);
@@ -23,6 +27,7 @@ function WeekdayColourManager() {
             } else {
                 firstIndexDay = firstSelectedDate.getDay() - 1;
             }
+
             firstDay = weekdaysList[firstIndexDay].day;
         } else if (firstDate == undefined) {
             firstDay = '';
@@ -39,22 +44,25 @@ function WeekdayColourManager() {
         } else if (secondDate == undefined) {
             secondDay = '';
         }
+
+        if (secondDay === firstDay) {
+            weekdaysList[secondIndexDay].style = "both";
+        } else {
+            if (secondIndexDay > -1) {
+                weekdaysList[secondIndexDay].style = "second";
+            }
+            if (firstIndexDay > -1) {
+                weekdaysList[firstIndexDay].style = "first";
+            }
+        }
     }
 
     function displayWeek() {
         return weekdaysList;
     }
-    function displayFirstDay(){
-        return firstDay;
-    }
-    function displaySecondDay(){
-        return secondDay;
-    }
 
     return {
         setDays: determineDay,
-        weekdays: displayWeek,
-        first: displayFirstDay,
-        second: displaySecondDay
+        weekdays: displayWeek
     }
 }

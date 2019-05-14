@@ -1,31 +1,61 @@
 describe("WeekdayColourManager testing", function () {
-    it("Sould return the weekdays list", function () {
+    it("Sould return the weekdays list with all 'styles' set to 'clear' with no input", function () {
         var weekdayInstance = WeekdayColourManager();
-        assert.deepEqual(weekdayInstance.weekdays(),[{ day: "Monday" },
-        { day: "Tuesday" },
-        { day: "Wednesday" },
-        { day: "Thursday" },
-        { day: "Friday" },
-        { day: "Saturday" },
-        { day: "Sunday" }]);
+        assert.deepEqual(weekdayInstance.weekdays(),
+        [{ day: "Monday", style: "clear" },
+        { day: "Tuesday", style: "clear" },
+        { day: "Wednesday", style: "clear" },
+        { day: "Thursday", style: "clear" },
+        { day: "Friday", style: "clear" },
+        { day: "Saturday", style: "clear" },
+        { day: "Sunday", style: "clear" }]);
     })
-    it("Should return all the elements with class 'clear' with no input",function(){
+    it("Should return all the elements with style 'clear' except Monday with style 'first'",function(){
         var weekdayInstance = WeekdayColourManager();
-        assert.equal(weekdayInstance.buildEle(),'<ul><li class=\'clear\' id=\'Monday\'><h3>Monday</h3></li><li class=\'clear\' id=\'Tuesday\'><h3>Tuesday</h3></li><li class=\'clear\' id=\'Wednesday\'><h3>Wednesday</h3></li><li class=\'clear\' id=\'Thursday\'><h3>Thursday</h3></li><li class=\'clear\' id=\'Friday\'><h3>Friday</h3></li><li class=\'clear\' id=\'Saturday\'><h3>Saturday</h3></li><li class=\'clear\' id=\'Sunday\'><h3>Sunday</h3></li></ul>');
+        weekdayInstance.setDays('2018-01-01',undefined)
+        assert.deepEqual(weekdayInstance.weekdays(),
+        [{ day: "Monday", style: "first" },
+        { day: "Tuesday", style: "clear" },
+        { day: "Wednesday", style: "clear" },
+        { day: "Thursday", style: "clear" },
+        { day: "Friday", style: "clear" },
+        { day: "Saturday", style: "clear" },
+        { day: "Sunday", style: "clear" }]);
     })
-    it("Should return all the elements with class 'clear' except for Monday with class 'first'",function(){
+    it("Should return all the elements with style 'clear' except Tuesday with style 'second'",function(){
         var weekdayInstance = WeekdayColourManager();
-        weekdayInstance.day('2018-01-01',undefined);
-        assert.equal(weekdayInstance.buildEle(),'<ul><li class=\'first\' id=\'Monday\'><h3>Monday</h3></li><li class=\'clear\' id=\'Tuesday\'><h3>Tuesday</h3></li><li class=\'clear\' id=\'Wednesday\'><h3>Wednesday</h3></li><li class=\'clear\' id=\'Thursday\'><h3>Thursday</h3></li><li class=\'clear\' id=\'Friday\'><h3>Friday</h3></li><li class=\'clear\' id=\'Saturday\'><h3>Saturday</h3></li><li class=\'clear\' id=\'Sunday\'><h3>Sunday</h3></li></ul>');
+        weekdayInstance.setDays(undefined,'2019-01-01')
+        assert.deepEqual(weekdayInstance.weekdays(),
+        [{ day: "Monday", style: "clear" },
+        { day: "Tuesday", style: "second" },
+        { day: "Wednesday", style: "clear" },
+        { day: "Thursday", style: "clear" },
+        { day: "Friday", style: "clear" },
+        { day: "Saturday", style: "clear" },
+        { day: "Sunday", style: "clear" }]);
     })
-    it("Should return all the elements with class 'clear' except for Tuesday with class 'second'",function(){
+    it("Should return all the elements with style 'clear' except Tuesday with style 'second' and Monday with style 'first'",function(){
         var weekdayInstance = WeekdayColourManager();
-        weekdayInstance.day(undefined,'2019-01-01');
-        assert.equal(weekdayInstance.buildEle(),'<ul><li class=\'clear\' id=\'Monday\'><h3>Monday</h3></li><li class=\'second\' id=\'Tuesday\'><h3>Tuesday</h3></li><li class=\'clear\' id=\'Wednesday\'><h3>Wednesday</h3></li><li class=\'clear\' id=\'Thursday\'><h3>Thursday</h3></li><li class=\'clear\' id=\'Friday\'><h3>Friday</h3></li><li class=\'clear\' id=\'Saturday\'><h3>Saturday</h3></li><li class=\'clear\' id=\'Sunday\'><h3>Sunday</h3></li></ul>');
+        weekdayInstance.setDays('2018-01-01','2019-01-01')
+        assert.deepEqual(weekdayInstance.weekdays(),
+        [{ day: "Monday", style: "first" },
+        { day: "Tuesday", style: "second" },
+        { day: "Wednesday", style: "clear" },
+        { day: "Thursday", style: "clear" },
+        { day: "Friday", style: "clear" },
+        { day: "Saturday", style: "clear" },
+        { day: "Sunday", style: "clear" }]);
     })
-    it("Should return all the elements with class 'clear' except for Wednesday with class 'both'",function(){
+    it("Should return all the elements with style 'clear' except Tuesday with style 'both' when dates fall on same day.",function(){
         var weekdayInstance = WeekdayColourManager();
-        weekdayInstance.day('2018-01-03','2019-01-02');
-        assert.equal(weekdayInstance.buildEle(),'<ul><li class=\'clear\' id=\'Monday\'><h3>Monday</h3></li><li class=\'clear\' id=\'Tuesday\'><h3>Tuesday</h3></li><li class=\'both\' id=\'Wednesday\'><h3>Wednesday</h3></li><li class=\'clear\' id=\'Thursday\'><h3>Thursday</h3></li><li class=\'clear\' id=\'Friday\'><h3>Friday</h3></li><li class=\'clear\' id=\'Saturday\'><h3>Saturday</h3></li><li class=\'clear\' id=\'Sunday\'><h3>Sunday</h3></li></ul>');
+        weekdayInstance.setDays('2018-01-02','2019-01-01')
+        assert.deepEqual(weekdayInstance.weekdays(),
+        [{ day: "Monday", style: "clear" },
+        { day: "Tuesday", style: "both" },
+        { day: "Wednesday", style: "clear" },
+        { day: "Thursday", style: "clear" },
+        { day: "Friday", style: "clear" },
+        { day: "Saturday", style: "clear" },
+        { day: "Sunday", style: "clear" }]);
     })
 })
