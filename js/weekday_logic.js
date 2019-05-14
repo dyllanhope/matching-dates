@@ -7,54 +7,39 @@ function WeekdayColourManager() {
     { day: "Saturday", style: "clear" },
     { day: "Sunday", style: "clear" }];
 
-    var firstDay = '';
-    var secondDay = '';
-
     function determineDay(firstD, secondD) {
-        var firstIndexDay = -1;
-        var secondIndexDay = -1;
-        var firstDate = firstD || undefined;
-        var secondDate = secondD || undefined;
+        var dateString = firstD + ',' + secondD;
 
         for (var x = 0; x < weekdaysList.length; x++) {
             weekdaysList[x].style = "clear";
         }
+        updateList(dateString);
 
-        if (firstDate != undefined) {
-            var firstSelectedDate = new Date(firstDate);
-            if (firstSelectedDate.getDay() === 0) {
-                firstIndexDay = 6;
-            } else {
-                firstIndexDay = firstSelectedDate.getDay() - 1;
-            }
-
-            firstDay = weekdaysList[firstIndexDay].day;
-        } else if (firstDate == undefined) {
-            firstDay = '';
-        }
-
-        if (secondDate != undefined) {
-            var secondSelectedDate = new Date(secondDate);
-            if (secondSelectedDate.getDay() === 0) {
-                secondIndexDay = 6;
-            } else {
-                secondIndexDay = secondSelectedDate.getDay() - 1;
-            }
-            secondDay = weekdaysList[secondIndexDay].day;
-        } else if (secondDate == undefined) {
-            secondDay = '';
-        }
-
-        if (secondDay === firstDay) {
-            weekdaysList[secondIndexDay].style = "both";
-        } else {
-            if (secondIndexDay > -1) {
-                weekdaysList[secondIndexDay].style = "second";
-            }
-            if (firstIndexDay > -1) {
-                weekdaysList[firstIndexDay].style = "first";
+    }
+    function updateList(dates) {
+        var selectedIndex = [-1,-1];
+        var selectedDate = '';
+        var datesArr = dates.split(',');
+        for (var k = 0; k < datesArr.length; k++) {
+            if (datesArr[k]) {
+                selectedDate = new Date(datesArr[k]);
+                if (selectedDate.getDay() === 0) {
+                    selectedIndex[k] = 6;
+                } else {
+                    selectedIndex[k] = selectedDate.getDay() - 1;
+                }
+    
+                if (k === 0) {
+                    weekdaysList[selectedIndex[0]].style = "first";
+                }else if (k === 1) {
+                    weekdaysList[selectedIndex[1]].style = "second";
+                }
+                if(selectedIndex[0]===selectedIndex[1]){
+                    weekdaysList[selectedIndex[0]].style = "both";
+                }
             }
         }
+
     }
 
     function displayWeek() {

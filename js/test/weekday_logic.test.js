@@ -12,7 +12,7 @@ describe("WeekdayColourManager testing", function () {
     })
     it("Should return all the elements with style 'clear' except Monday with style 'first'",function(){
         var weekdayInstance = WeekdayColourManager();
-        weekdayInstance.setDays('2018-01-01',undefined)
+        weekdayInstance.setDays('2018-01-01','')
         assert.deepEqual(weekdayInstance.weekdays(),
         [{ day: "Monday", style: "first" },
         { day: "Tuesday", style: "clear" },
@@ -24,7 +24,7 @@ describe("WeekdayColourManager testing", function () {
     })
     it("Should return all the elements with style 'clear' except Tuesday with style 'second'",function(){
         var weekdayInstance = WeekdayColourManager();
-        weekdayInstance.setDays(undefined,'2019-01-01')
+        weekdayInstance.setDays('','2019-01-01')
         assert.deepEqual(weekdayInstance.weekdays(),
         [{ day: "Monday", style: "clear" },
         { day: "Tuesday", style: "second" },
