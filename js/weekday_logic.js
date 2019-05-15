@@ -1,11 +1,13 @@
 function WeekdayColourManager() {
-    var weekdaysList = [{ day: "Monday", style: "clear" },
-    { day: "Tuesday", style: "clear" },
-    { day: "Wednesday", style: "clear" },
-    { day: "Thursday", style: "clear" },
-    { day: "Friday", style: "clear" },
-    { day: "Saturday", style: "clear" },
-    { day: "Sunday", style: "clear" }];
+    var weekdaysList = [
+        { day: "Sunday", style: "clear" },
+        { day: "Monday", style: "clear" },
+        { day: "Tuesday", style: "clear" },
+        { day: "Wednesday", style: "clear" },
+        { day: "Thursday", style: "clear" },
+        { day: "Friday", style: "clear" },
+        { day: "Saturday", style: "clear" },
+    ];
 
     function determineDay(firstD, secondD) {
 
@@ -27,11 +29,7 @@ function WeekdayColourManager() {
         var returnData = { day: "", index: -1 };
         if (date) {
             var selectedDate = new Date(date);
-            if (selectedDate.getDay() === 0) {
-                returnData.index = 6;
-            } else {
-                returnData.index = selectedDate.getDay() - 1;
-            }
+            returnData.index = selectedDate.getDay();
             returnData.day = weekdaysList[returnData.index].day;
         }
         return returnData;
