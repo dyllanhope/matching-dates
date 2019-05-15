@@ -54,6 +54,7 @@ function WeekdayColourManager() {
 
     return {
         setDays: determineDay,
-        weekdays: displayWeek
+        weekdays: displayWeek,
+        getData: getWeekDayData
     }
 }
